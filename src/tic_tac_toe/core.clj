@@ -14,9 +14,9 @@
                   [" ", " ", " "]
                   [" ", " ", " "]])
 
-(clojure.string/join (flatten empty-board))
-
-(flatten empty-board)
+(defn make-board [string-rep]
+  "Accepts a string representation of a board and returns a board"
+  (partition 3 (into [] string-rep)))
 
 (defn make-printable-board [board]
   (clojure.string/join "\n-----\n"
@@ -26,7 +26,12 @@
   (let [joined (map clojure.string/join board)]
     (some (partial re-find #"XXX|OOO") joined)))
 
+(defn- vertical-winner? [board]
+  (let [columns (apply mapv vector board)]
+    (some (partial = ["X" "X" "X"]) columns)))
+
 (defn in-winning-state? [board]
-  (or (horizontal-winner? board)))
+  (or (horizontal-winner? board)
+      (vertical-winner? board)))
 
 
