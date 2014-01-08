@@ -29,8 +29,12 @@
         joined-columns (map clojure.string/join columns)]
     (some (partial re-find #"XXX|OOO") joined-columns)))
 
+(defn- diagonal-winner? [board]
+  false)
+
 (defn in-winning-state? [board]
   (or (horizontal-winner? board)
-      (vertical-winner? board)))
+      (vertical-winner? board)
+        (diagonal-winner? board)))
 
 
