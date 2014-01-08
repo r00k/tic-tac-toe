@@ -20,15 +20,18 @@
 
 (defn make-printable-board [board]
   (clojure.string/join "\n-----\n"
-                       (map (partial clojure.string/join "|") board)))
+                       (map
+                         (partial clojure.string/join "|")
+                         board)))
 
 (defn- horizontal-winner? [board]
   (let [joined (map clojure.string/join board)]
     (some (partial re-find #"XXX|OOO") joined)))
 
 (defn- vertical-winner? [board]
-  (let [columns (apply mapv vector board)]
-    (some (partial = ["X" "X" "X"]) columns)))
+  (let [columns (apply mapv vector board)
+        joined-columns (map clojure.string/join columns)]
+    (some (partial re-find #"XXX|OOO") joined-columns)))
 
 (defn in-winning-state? [board]
   (or (horizontal-winner? board)

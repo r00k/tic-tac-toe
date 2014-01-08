@@ -6,7 +6,8 @@
 (def board-with-x-as-horizontal-winner [["X" "X" "X"] ["" "" ""] ["" "" ""]])
 (def board-with-o-as-horizontal-winner [["O" "O" "O"] ["" "" ""] ["" "" ""]])
 (def board-with-x-as-vertical-winner [["O" "O" "X"] ["" "" "X"] ["O" "" "X"]])
-(def board-with-o-as-vertical-winner [["O" "O" "X"] ["" "" "X"] ["O" "" "X"]])
+(def board-with-o-as-vertical-winner [["O" "O" "X"] ["O" "X" ""] ["O" "" "X"]])
+
 
 (deftest test-make-board
   (testing "Given a string representation it returns a board"
@@ -28,9 +29,9 @@
   (testing "When someone has won"
     (is (in-winning-state? board-with-x-as-horizontal-winner))
     (is (in-winning-state? board-with-o-as-horizontal-winner))
-    (is (in-winning-state? board-with-x-as-vertical-winner))))
-
-
+    (is (in-winning-state? board-with-x-as-vertical-winner))
+    (is (in-winning-state? board-with-o-as-vertical-winner))))
 
 (= 0 (:fail (run-tests)) (:error (run-tests)))
 
+(run-tests)
