@@ -8,13 +8,6 @@
 (def board-with-x-as-vertical-winner [["O" "O" "X"] ["" "" "X"] ["O" "" "X"]])
 (def board-with-o-as-vertical-winner [["O" "O" "X"] ["O" "X" ""] ["O" "" "X"]])
 
-
-(deftest test-make-board
-  (testing "Given a string representation it returns a board"
-    (is (= '((\X \X \X) (\O \O \O) (\X \X \X)) (make-board "XXXOOOXXX")))
-    (is (= '((\X \O \X) (\space \space \space) (\O \X \O)) (make-board "XOX   OXO")))
-    (is (= '((\space \X \X) (\O \O \space) (\X \X \O)) (make-board " XXOO XXO")))))
-
 (deftest test-printable-board
   (testing "Printing an empty board"
     (is (= " | | \n-----\n | | \n-----\n | | "

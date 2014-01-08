@@ -10,10 +10,6 @@
 ;; make-move [player board position]
 ;; play-game (loops until winner)
 
-(def empty-board [[" ", " ", " "]
-                  [" ", " ", " "]
-                  [" ", " ", " "]])
-
 (defn make-board [string-rep]
   "Accepts a string representation of a board and returns a board"
   (partition 3 (into [] string-rep)))
