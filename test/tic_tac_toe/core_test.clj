@@ -2,6 +2,7 @@
   (:use clojure.test
         tic-tac-toe.core))
 
+(def empty-board [[" ", " ", " " ] [" ", " ", " "] [" ", " ", " "]])
 (def in-progress-board [["X" "X" "O"] ["O" "O" "X"] [" " " " " "]])
 (def board-with-x-as-horizontal-winner [["X" "X" "X"] ["" "" ""] ["" "" ""]])
 (def board-with-o-as-horizontal-winner [["O" "O" "O"] ["" "" ""] ["" "" ""]])
@@ -11,7 +12,7 @@
 (deftest test-printable-board
   (testing "Printing an empty board"
     (is (= " | | \n-----\n | | \n-----\n | | "
-           (make-printable-board tic-tac-toe.core/empty-board))))
+           (make-printable-board empty-board))))
   (testing "Printing a board with moves"
     (is (= "X|X|O\n-----\nO|O|X\n-----\n | | ")
            (make-printable-board in-progress-board))))
