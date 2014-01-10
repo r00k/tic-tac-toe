@@ -9,6 +9,7 @@
 (def board-with-x-as-vertical-winner [["O" "O" "X"] ["" "" "X"] ["O" "" "X"]])
 (def board-with-o-as-vertical-winner [["O" "O" "X"] ["O" "X" ""] ["O" "" "X"]])
 (def board-with-x-as-diagonal-winner [["X" "O" " "] ["O" "X" ""] ["O" "" "X"]])
+(def board-with-x-as-diagonal-winner-2 [[" " "O" "X"] ["O" "X" ""] ["X" "" "O"]])
 
 (deftest test-printable-board
   (testing "Printing an empty board"
@@ -26,7 +27,9 @@
     (is (in-winning-state? board-with-o-as-horizontal-winner))
     (is (in-winning-state? board-with-x-as-vertical-winner))
     (is (in-winning-state? board-with-o-as-vertical-winner))
-    (is (in-winning-state? board-with-x-as-diagonal-winner))))
+    (is (in-winning-state? board-with-x-as-diagonal-winner))
+    (is (in-winning-state? board-with-x-as-diagonal-winner-2))))
+
 
 (= 0 (:fail (run-tests)) (:error (run-tests)))
 
