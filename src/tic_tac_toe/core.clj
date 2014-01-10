@@ -3,7 +3,7 @@
 ;; v0 - AI plays O and moves randomly; program detects when someone has won
 ;; v1 - AI plays O and chooses based on minimax
 ;; v2 - AI plays either side and chooses based on minimax
-;; v2 - AE plays either side and uses alpha-beta pruning
+;; v2 - AI plays either side and uses alpha-beta pruning
 
 ;; available-moves [board]
 ;; in-winning-state? [board]
@@ -34,13 +34,15 @@
     (nth (nth board x) x)))
 
 (defn diagonal2 [board]
-  false)
-
-
+  (list (nth (nth board 0) 2)
+        (nth (nth board 1) 1)
+        (nth (nth board 2) 0)))
 
 (defn- diagonal-winner? [board]
   (or (= '("X" "X" "X") (diagonal1 board))
-      (= '("X" "X" "X") (diagonal2 board))))
+      (= '("X" "X" "X") (diagonal2 board))
+      (= '("O" "O" "O") (diagonal1 board))
+      (= '("O" "O" "O") (diagonal2 board))))
 
 (defn in-winning-state? [board]
   (or (horizontal-winner? board)
