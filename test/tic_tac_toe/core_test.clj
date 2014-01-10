@@ -36,6 +36,6 @@
   (testing "When no one has won"
     (is (not (in-winning-state? in-progress-board))))
   (testing "All winning boards are detected"
-    (every? in-winning-state? winning-boards)))
+    (is (every? in-winning-state? winning-boards))))
 
 (= 0 (:fail (run-tests)) (:error (run-tests)))
