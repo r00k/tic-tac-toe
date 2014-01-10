@@ -23,16 +23,19 @@
   (def board-with-o-as-diagonal-winner [["O" "X" " "] ["X" "O" ""] ["X" "" "O"]])
   (def board-with-o-as-diagonal-winner-2 [[" " "X" "O"] ["X" "O" ""] ["O" " " "X"]])
 
+  (def winning-boards
+    [board-with-x-as-horizontal-winner
+     board-with-o-as-horizontal-winner
+     board-with-x-as-vertical-winner
+     board-with-o-as-vertical-winner
+     board-with-x-as-diagonal-winner
+     board-with-x-as-diagonal-winner-2
+     board-with-o-as-diagonal-winner
+     board-with-o-as-diagonal-winner-2])
+
   (testing "When no one has won"
     (is (not (in-winning-state? in-progress-board))))
-  (testing "When someone has won"
-    (is (in-winning-state? board-with-x-as-horizontal-winner))
-    (is (in-winning-state? board-with-o-as-horizontal-winner))
-    (is (in-winning-state? board-with-x-as-vertical-winner))
-    (is (in-winning-state? board-with-o-as-vertical-winner))
-    (is (in-winning-state? board-with-x-as-diagonal-winner))
-    (is (in-winning-state? board-with-x-as-diagonal-winner-2))
-    (is (in-winning-state? board-with-o-as-diagonal-winner))
-    (is (in-winning-state? board-with-o-as-diagonal-winner-2))))
+  (testing "All winning boards are detected"
+    (every? in-winning-state? winning-boards)))
 
 (= 0 (:fail (run-tests)) (:error (run-tests)))
