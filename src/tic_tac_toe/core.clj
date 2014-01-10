@@ -33,16 +33,20 @@
   (for [x (range 3)]
     (nth (nth board x) x)))
 
-(defn diagonal2 [board]
+(defn- diagonal2 [board]
   (list (nth (nth board 0) 2)
         (nth (nth board 1) 1)
         (nth (nth board 2) 0)))
 
+(defn- diagonals [board]
+  (list (diagonal1 board)
+        (diagonal2 board)))
+
 (defn- diagonal-winner? [board]
-  (or (= '("X" "X" "X") (diagonal1 board))
-      (= '("X" "X" "X") (diagonal2 board))
-      (= '("O" "O" "O") (diagonal1 board))
-      (= '("O" "O" "O") (diagonal2 board))))
+  (let [diagonals (diagonals board)]
+    (or
+     (some (partial = '("X" "X" "X")) diagonals)
+     (some (partial = '("O" "O" "O")) diagonals))))
 
 (defn in-winning-state? [board]
   (or (horizontal-winner? board)
