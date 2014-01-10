@@ -1,4 +1,4 @@
-(ns tic-tac-toe.core)
+(ns tic-tac-toe.board)
 
 ;; v0 - AI plays O and moves randomly; program detects when someone has won
 ;; v1 - AI plays O and chooses based on minimax
@@ -25,7 +25,7 @@
     (some (partial re-find #"XXX|OOO") joined)))
 
 (defn- vertical-winner? [board]
-  (let [columns (apply mapv vector board)
+  (let [columns (apply map vector board)
         joined-columns (map clojure.string/join columns)]
     (some (partial re-find #"XXX|OOO") joined-columns)))
 
@@ -52,5 +52,3 @@
   (or (horizontal-winner? board)
       (vertical-winner? board)
       (diagonal-winner? board)))
-
-
