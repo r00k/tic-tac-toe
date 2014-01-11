@@ -10,45 +10,27 @@
 ;; make-move [player board position]
 ;; play-game (loops until winner)
 
-(defn make-board [string-rep]
-  "Accepts a string representation of a board and returns a board"
-  (partition 3 (into [] string-rep)))
-
-(defn make-printable-board [board]
-  (clojure.string/join "\n-----\n"
-                       (map
-                         (partial clojure.string/join "|")
-                         board)))
+(defn- same-player? [line]
+  (when (and (apply = line)
+             (not= '- (first line)))
+    (first line)))
 
 (defn- horizontal-winner? [board]
-  (let [joined (map clojure.string/join board)]
-    (some (partial re-find #"XXX|OOO") joined)))
+  (some same-player? (partition 3 board)))
 
 (defn- vertical-winner? [board]
-  (let [columns (apply map vector board)
-        joined-columns (map clojure.string/join columns)]
-    (some (partial re-find #"XXX|OOO") joined-columns)))
-
-(defn- diagonal1 [board]
-  (for [x (range 3)]
-    (nth (nth board x) x)))
-
-(defn- diagonal2 [board]
-  (list (nth (nth board 0) 2)
-        (nth (nth board 1) 1)
-        (nth (nth board 2) 0)))
-
-(defn- diagonals [board]
-  (list (diagonal1 board)
-        (diagonal2 board)))
+  (let [columns (apply map vector (partition 3 board))]
+    (some same-player? columns)))
 
 (defn- diagonal-winner? [board]
-  (let [diagonals (diagonals board)]
-    (or
-     (some (partial = '("X" "X" "X")) diagonals)
-     (some (partial = '("O" "O" "O")) diagonals))))
+  (or
+    (same-player? (map (partial nth board) '(0 4 8)))
+    (same-player? (map (partial nth board) '(2 4 6)))))
 
 (defn in-winning-state? [board]
   (or (horizontal-winner? board)
       (vertical-winner? board)
       (diagonal-winner? board)))
+
+(defn unplayed? [location board]
+  (= '- (nth board location)))
