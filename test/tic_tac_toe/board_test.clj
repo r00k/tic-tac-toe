@@ -36,7 +36,11 @@
     (is (= 'O (in-winning-state? board-with-o-as-diagonal-winner)))
     (is (= 'O (in-winning-state? board-with-o-as-diagonal-winner-2)))))
 
-(deftest test-unplayed
-  (testing "Returns true when a location has not been played in"
-    (is (unplayed? 0 '[- X X, X O O, O O X]))
-    (is (not (unplayed? 0 '[X - -, - - -, - - -])))))
+(deftest test-possible-moves
+  (testing "Returns locations that have not been played in"
+    (is (= [0 1 2] (possible-moves '[- - -, x o x, o x o])))))
+
+(deftest test-move
+  (testing "Makes a move"
+    (is (= {:board '[x - -, - - -, - - -] :turn 'o}
+           (move { :board '[- - -, - - -, - - -] :turn 'x } 0)))))

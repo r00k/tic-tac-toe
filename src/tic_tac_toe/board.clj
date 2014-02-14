@@ -5,11 +5,6 @@
 ;; v2 - AI plays either side and chooses based on minimax
 ;; v2 - AI plays either side and uses alpha-beta pruning
 
-;; available-moves [board]
-;; in-winning-state? [board]
-;; make-move [player board position]
-;; play-game (loops until winner)
-
 (defn- same-player? [line]
   (when (and (apply = line)
              (not= '- (first line)))
@@ -32,5 +27,8 @@
       (vertical-winner? board)
       (diagonal-winner? board)))
 
-(defn unplayed? [location board]
-  (= '- (nth board location)))
+(defn possible-moves [board]
+  (keep-indexed (fn [idx item] (if (= item '-) idx)) board))
+
+(defn move [{:keys [board turn]} idx]
+  { :board (assoc board idx turn) :turn (if (= turn 'x) 'o 'x) })
