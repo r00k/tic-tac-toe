@@ -2,17 +2,17 @@
   (:use clojure.test
         tic-tac-toe.board))
 
-(def in-progress-board '[X X O, O O X, - - -])
+(def in-progress-board '[x x o, o o x, - - -])
 
 (deftest test-in-winning-state?
-  (def board-with-x-as-horizontal-winner '[X X X, - - -, - - -])
-  (def board-with-o-as-horizontal-winner '[O O O, - - -, - - -])
-  (def board-with-x-as-vertical-winner   '[O O X, - - X, O - X])
-  (def board-with-o-as-vertical-winner   '[O O X, O X -, O - X])
-  (def board-with-x-as-diagonal-winner   '[X O -, O X -, O - X])
-  (def board-with-x-as-diagonal-winner-2 '[- O X, O X -, X - O])
-  (def board-with-o-as-diagonal-winner   '[O X -, X O -, X - O])
-  (def board-with-o-as-diagonal-winner-2 '[- X O, X O -, O - X])
+  (def board-with-x-as-horizontal-winner '[x x x, - - -, - - -])
+  (def board-with-o-as-horizontal-winner '[o o o, - - -, - - -])
+  (def board-with-x-as-vertical-winner   '[o o x, - - x, o - x])
+  (def board-with-o-as-vertical-winner   '[o o x, o x -, o - x])
+  (def board-with-x-as-diagonal-winner   '[x o -, o x -, o - x])
+  (def board-with-x-as-diagonal-winner-2 '[- o x, o x -, x - o])
+  (def board-with-o-as-diagonal-winner   '[o x -, x o -, x - o])
+  (def board-with-o-as-diagonal-winner-2 '[- x o, x o -, o - x])
 
   (def winning-boards
     [board-with-x-as-horizontal-winner
@@ -27,14 +27,14 @@
   (testing "When no one has won"
     (is (not (in-winning-state? in-progress-board))))
   (testing "All winning boards are detected"
-    (is (= 'X (in-winning-state? board-with-x-as-horizontal-winner)))
-    (is (= 'O (in-winning-state? board-with-o-as-horizontal-winner)))
-    (is (= 'X (in-winning-state? board-with-x-as-vertical-winner)))
-    (is (= 'O (in-winning-state? board-with-o-as-vertical-winner)))
-    (is (= 'X (in-winning-state? board-with-x-as-diagonal-winner)))
-    (is (= 'X (in-winning-state? board-with-x-as-diagonal-winner-2)))
-    (is (= 'O (in-winning-state? board-with-o-as-diagonal-winner)))
-    (is (= 'O (in-winning-state? board-with-o-as-diagonal-winner-2)))))
+    (is (= 'x (in-winning-state? board-with-x-as-horizontal-winner)))
+    (is (= 'o (in-winning-state? board-with-o-as-horizontal-winner)))
+    (is (= 'x (in-winning-state? board-with-x-as-vertical-winner)))
+    (is (= 'o (in-winning-state? board-with-o-as-vertical-winner)))
+    (is (= 'x (in-winning-state? board-with-x-as-diagonal-winner)))
+    (is (= 'x (in-winning-state? board-with-x-as-diagonal-winner-2)))
+    (is (= 'o (in-winning-state? board-with-o-as-diagonal-winner)))
+    (is (= 'o (in-winning-state? board-with-o-as-diagonal-winner-2)))))
 
 (deftest test-possible-moves
   (testing "Returns locations that have not been played in"
@@ -43,4 +43,4 @@
 (deftest test-move
   (testing "Makes a move"
     (is (= {:board '[x - -, - - -, - - -] :turn 'o}
-           (move { :board '[- - -, - - -, - - -] :turn 'x } 0)))))
+           (make-move initial-position 0)))))

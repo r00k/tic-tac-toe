@@ -5,6 +5,8 @@
 ;; v2 - AI plays either side and chooses based on minimax
 ;; v2 - AI plays either side and uses alpha-beta pruning
 
+(def initial-position {:board '[- - -, - - -, - - -] :turn 'x})
+
 (defn- same-player? [line]
   (when (and (apply = line)
              (not= '- (first line)))
@@ -30,5 +32,5 @@
 (defn possible-moves [board]
   (keep-indexed (fn [idx item] (if (= item '-) idx)) board))
 
-(defn move [{:keys [board turn]} idx]
+(defn make-move [{:keys [board turn]} idx]
   { :board (assoc board idx turn) :turn (if (= turn 'x) 'o 'x) })
