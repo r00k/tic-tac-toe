@@ -7,6 +7,9 @@
 
 (def initial-position {:board '[- - -, - - -, - - -] :turn 'x})
 
+(defn unplayed? [board idx]
+  (= '- (board idx)))
+
 (defn- same-player? [line]
   (when (and (apply = line)
              (not= '- (first line)))

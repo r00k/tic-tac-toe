@@ -4,6 +4,11 @@
 
 (def in-progress-board '[x x o, o o x, - - -])
 
+(deftest test-unplayed?
+  (testing "returns true when the index identifies an unplayed spot"
+    (is (unplayed? in-progress-board 6))
+    (is (not (unplayed? in-progress-board 0)))))
+
 (deftest test-in-winning-state?
   (def board-with-x-as-horizontal-winner '[x x x, - - -, - - -])
   (def board-with-o-as-horizontal-winner '[o o o, - - -, - - -])

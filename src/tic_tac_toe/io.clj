@@ -7,7 +7,7 @@
 
 (defn render [board]
   (str (->> board
-            (map-indexed (fn [idx location] (if (unplayed? idx board)
+            (map-indexed (fn [idx location] (if (unplayed? board idx)
                                               (format-index idx)
                                               (format-move location))))
             (partition 3)
